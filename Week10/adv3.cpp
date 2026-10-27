@@ -20,12 +20,21 @@ int dieRoll(int max = 6) {      // random
 }
 
 void ending() {
-    bool survived = health > 0;
-    if (survived) {
+    
+    if (health > 7) {
         cout << "You decided to get away with what you have, " << totalGold << " gold, and with " << health << " health left";
     }
+    else if(health >= 3) {
+        cout << "You decided to run away with what you could get, " << totalGold << " gold, and with " << health << " health left you are in severe need of a doctor.";
+    }
+    else if(health > 0) {
+        cout << "You barely survived with " << health << " health... You will be left with scars for the rest of your life, was the " << totalGold << " gold worth it?";
+    }
+    else if(totalGold == 0) {
+        cout << "You lost against that monster, with nothing to show for it except a wound in your gut.";
+    }
     else {
-        cout << "You lost against that monster, you have " << totalGold << " total gold, left alone, on your body in the dungeon..." << endl;
+        cout << "You lost against that monster, you have " << totalGold << " total gold, left alone, on your body in the dungeon...";
     }
 }
 
@@ -62,16 +71,16 @@ bool askYN() {
     cin >> input;
 
     if(input == "no") {
-            return false;
-        }
-        else if(input == "yes") {
-            cout << "That's a yes then!" << endl;
-            return true;
-        }
-        else {
-            cout << "I dunno what you just said, I guess it was a yes then!";
-            return true;
-        }
+        return false;
+    }
+    else if(input == "yes") {
+        cout << "That's a yes then!" << endl;
+        return true;
+    }
+    else {
+        cout << "I dunno what you just said, I guess it was a yes then!";
+        return true;
+    }
 }
 
 
@@ -85,11 +94,11 @@ int main() {
         cout << "Hello Player, won't you go adventuring?" << endl;
        
         if(askYN()) {
+            Encounter();
         }
         else{
             break;
         } 
-        Encounter();
     }
     ending();
 }
